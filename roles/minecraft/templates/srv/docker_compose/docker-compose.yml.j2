@@ -1,0 +1,16 @@
+services:
+  mc:
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - "{{ minecraft_docker_compose.port }}:{{ minecraft_docker_compose.port }}"
+    environment:
+      EULA: "TRUE"
+      #MODPACK: "{{ minecraft_docker_compose.modpack }}"  # Remplace par l'URL de ton modpack
+      HARDCORE: "TRUE"
+      REMOVE_OLD_MODS: "TRUE"  # Supprime les anciens mods avant d'installer le nouveau modpack
+      VERSION: "{{ minecraft_docker_compose.version }}"
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - ./data:/data
