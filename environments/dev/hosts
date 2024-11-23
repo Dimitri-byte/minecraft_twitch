@@ -1,0 +1,4 @@
+[server:children]
+
+[minecraft]
+biard-server-1
