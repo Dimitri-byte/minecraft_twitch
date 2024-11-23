@@ -1,0 +1,6 @@
+---
+
+minecraft_vanilla_docker_compose:
+  name: minecraft_vanilla
+  directory: /srv/docker-compose
+  port: 25565

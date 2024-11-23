@@ -1,0 +1,27 @@
+---
+- name: Create multiple data folders
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+    owner: root
+    group: root
+  loop:
+    - "{{ minecraft_vanilla_docker_compose.directory }}/{{ minecraft_vanilla_docker_compose.name }}/"
+
+- name: Template docker-compose 
+  ansible.builtin.template:
+    src: srv/docker_compose/docker-compose.yml.j2
+    dest: "{{ minecraft_vanilla_docker_compose.directory }}/{{ minecraft_vanilla_docker_compose.name }}/docker-compose.yml"
+    mode: "0644"
+  register: docker_compose_file
+
+- name: Create and start services
+  community.docker.docker_compose_v2:
+    project_src: "{{ minecraft_vanilla_docker_compose.directory }}/{{ minecraft_vanilla_docker_compose.name }}"
+  register: output
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Show results
+  ansible.builtin.debug:
+    var: output

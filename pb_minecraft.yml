@@ -1,0 +1,5 @@
+- name: "Minecraft Twitch"
+  hosts: 'servers'
+  become: true
+  roles:
+    - { role: 'minecraft_vanilla', tags: [ 'mine' ] }
