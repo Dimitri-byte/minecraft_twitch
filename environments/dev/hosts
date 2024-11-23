@@ -1,4 +1,4 @@
 [server:children]
 
 [minecraft]
-biard-server-1
+biard-server-1.local
